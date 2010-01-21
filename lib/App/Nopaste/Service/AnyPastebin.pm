@@ -147,11 +147,41 @@ use constant FORMATS => {
 
 =head1 NAME
 
-App::Nopaste::Service::AnyPastebin - nopaste to any pastebin that runs the same nopaste service as http://pastebin.com/ 
+App::Nopaste::Service::AnyPastebin - paste to any pastebin that runs the same paste service as http://pastebin.com/ 
+
+=head1 METHODS
+
+=head2 forbid_in_default
+
+Constant of false
+
+=head2 fill_form
+
+Overwritten to submit paste via L<WWW::Mechanize>
+
+=head2 get
+
+Overwritten to pack basic auth information into L<WWW::Mechanize>
+
+=head2 return
+
+Parse redirect and return uri
+
+=head2 uri
+
+Default of http://pastebin.com
+
+=cut
 
 =head1 AUTHOR
 
 Jason M Mills, C<< <jmmills at cpan.org> >>
+
+=head1 TODO
+
+    * Write more tests
+    * Localize requests_redirectable deletion
+    * Come up with a way to access basic auth with out using private accessors
 
 =head1 BUGS
 
