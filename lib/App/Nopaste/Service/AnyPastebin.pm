@@ -6,7 +6,7 @@ use Scalar::Util 'blessed';
 
 use base q[App::Nopaste::Service];
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub uri { return 'http://pastebin.com/' }
 
@@ -25,6 +25,18 @@ sub get {
     return $self->SUPER::get($mech => @_);
 }
 
+sub post_content {
+    my ($self, %args) = @_;
+    
+    return {
+        paste => 'Send',
+        code2 => $args{text},
+        poster => exists($args{nick})? $args{nick} : '',
+        format => exists($self->FORMATS->{$args{lang}})? $args{lang} : 'text',
+        expiry => 'd'
+    };
+}
+
 sub fill_form {
     my ($self, $mech) = (shift, shift);
     my %args = @_;
@@ -34,13 +46,7 @@ sub fill_form {
         'Content-Type' => 'application/x-www-form-urlencoded'
     };
     
-    my $content = {
-        paste => 'Send',
-        code2 => $args{text},
-        poster => exists($args{nick})? $args{nick} : '',
-        format => exists($self->FORMATS->{$args{lang}})? $args{lang} : 'text',
-        expiry => 'd'
-    };
+    my $content = $self->post_content(%args);
     
     $mech->agent_alias('Linux Mozilla');
     my $form = $mech->form_name('editor') || return;
@@ -154,6 +160,23 @@ App::Nopaste::Service::AnyPastebin - paste to any pastebin that runs the same pa
 =head2 forbid_in_default
 
 Constant of false
+
+=head2 post_content
+
+Returns a HashRef of content to post.
+By default:
+    
+    {
+        paste => 'Send',
+        code2 => 'text',
+        poster => 'nick',
+        format => 'lang',
+        expiry => 'd'
+    };
+
+Of course nothing is stopping you from building sub-classing this.
+    
+=cut
 
 =head2 fill_form
 
