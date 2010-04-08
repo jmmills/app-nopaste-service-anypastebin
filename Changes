@@ -4,6 +4,8 @@ Revision history for App-Nopaste-Service-AnyPastebin
         First version, pushed to CPAN
 
 0.02    Mar 25th 2010
-				As per feature request via RT #55257:
-					Derivable post content allowed - thanks AEvar
+        As per feature request via RT #55257:
+           Derivable post content allowed - thanks AEvar
+0.03    Apr 8th 2010
+        Fixed changes file and updated verison.
 

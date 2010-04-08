@@ -6,7 +6,7 @@ use Scalar::Util 'blessed';
 
 use base q[App::Nopaste::Service];
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub uri { return 'http://pastebin.com/' }
 
