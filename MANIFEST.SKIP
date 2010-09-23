@@ -9,3 +9,5 @@
 ^Makefile.old
 ^META\.yml
 .*?\.tar(?:\.gz|)
+^*.kpf
+^*komodo*
