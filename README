@@ -32,6 +32,8 @@ You can also look for information at:
     Search CPAN
         http://search.cpan.org/dist/App-Nopaste-Service-AnyPastebin/
 
+    GitHub
+        http://github.com/jmmills/app-nopaste-service-anypastebin
 
 LICENSE AND COPYRIGHT
 
@@ -42,4 +44,3 @@ under the terms of either: the GNU General Public License as published
 by the Free Software Foundation; or the Artistic License.
 
 See http://dev.perl.org/licenses/ for more information.
-

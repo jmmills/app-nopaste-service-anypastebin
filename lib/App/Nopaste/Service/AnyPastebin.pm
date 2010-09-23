@@ -16,18 +16,18 @@ sub get {
     my $self = shift;
     my $mech = shift;
     my %args = @_;
-    
+
     $mech->{__username} = $args{username}
         if exists($args{username}) && $args{username};
     $mech->{__password} = $args{password}
         if exists($args{password}) && $args{password};
-    
+
     return $self->SUPER::get($mech => @_);
 }
 
 sub post_content {
     my ($self, %args) = @_;
-    
+
     return {
         paste => 'Send',
         code2 => $args{text},
@@ -40,37 +40,37 @@ sub post_content {
 sub fill_form {
     my ($self, $mech) = (shift, shift);
     my %args = @_;
-    
+
     my $header = {
         'User-Agent' => 'Mozilla/5.0',
         'Content-Type' => 'application/x-www-form-urlencoded'
     };
-    
+
     my $content = $self->post_content(%args);
-    
+
     $mech->agent_alias('Linux Mozilla');
     my $form = $mech->form_name('editor') || return;
-    
+
     # do not follow redirect please
     @{$mech->requests_redirectable} = ();
-    
+
     my $paste = HTML::Form::Input->new(
         type => 'text',
         value => 'Send',
         name => 'paste'
     )->add_to_form($form);
-    
+
     return $mech->submit_form( form_name => 'editor', fields => $content );
 }
 
 sub return {
     my ($self, $mech) = (shift, shift);
-    
+
     return unless blessed($mech->res) && $mech->res->can('header');
-    
+
     my $result  = $mech->res->header('Location')? 1 : 0;
     my $link_or_err = $result? $mech->res->header('Location') : 'Error!';
-    
+
     return (1, $link_or_err);
 }
 
@@ -153,7 +153,7 @@ use constant FORMATS => {
 
 =head1 NAME
 
-App::Nopaste::Service::AnyPastebin - paste to any pastebin that runs the same paste service as http://pastebin.com/ 
+App::Nopaste::Service::AnyPastebin - paste to any pastebin that runs the same paste service as http://pastebin.com/
 
 =head1 METHODS
 
@@ -165,7 +165,7 @@ Constant of false
 
 Returns a HashRef of content to post.
 By default:
-    
+
     {
         paste => 'Send',
         code2 => 'text',
@@ -175,7 +175,7 @@ By default:
     };
 
 Of course nothing is stopping you from building sub-classing this.
-    
+
 =cut
 
 =head2 fill_form
@@ -239,6 +239,10 @@ L<http://cpanratings.perl.org/d/App-Nopaste-Service-AnyPastebin>
 
 L<http://search.cpan.org/dist/App-Nopaste-Service-AnyPastebin/>
 
+=item * GitHub
+
+L<http://github.com/jmmills/app-nopaste-service-anypastebin>
+
 =back
 
 
@@ -258,4 +262,3 @@ See http://dev.perl.org/licenses/ for more information.
 
 
 =cut
-
