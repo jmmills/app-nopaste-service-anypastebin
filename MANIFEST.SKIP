@@ -3,7 +3,6 @@
 \bpm_to_blib
 \bTODO
 ^Makefile$
-^\binc
 ^MANIFEST\.bak
 ^MANIFEST\.SKIP
 ^Makefile.old
